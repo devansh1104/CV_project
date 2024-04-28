@@ -59,3 +59,4 @@ for image in images:
     kps, descs = orb.detectAndCompute(image, None)
     descs = [dbow.ORB.from_cv_descriptor(desc) for desc in descs]
     scores = loaded_db.query(descs)
+    # print(descs)

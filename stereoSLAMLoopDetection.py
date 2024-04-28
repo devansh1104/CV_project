@@ -20,12 +20,12 @@ class VisualOdometry():
     def __init__(self, data_dir):
         
         print("Loading Images")
-        self.K_l, self.P_l, self.K_r, self.P_r = self._load_calib("C:/Users/45213/Downloads/data_odometry_gray/dataset/sequences/07/calib.txt")
-        self.gt_poses = self._load_poses("C:/Users/45213/Downloads/data_odometry_poses/dataset/poses/07.txt")
+        self.K_l, self.P_l, self.K_r, self.P_r = self._load_calib("/Users/devanshmenaria/Computer Vision Assignments/Course Project/VisualSLAM/KITTI_sequence_2/calib.txt")
+        self.gt_poses = self._load_poses("/Users/devanshmenaria/Computer Vision Assignments/Course Project/VisualSLAM/KITTI_sequence_2/poses.txt")
         #self.images_l = self._load_images("C:/Users/45213/OneDrive/Desktop/sequence3/images_l")
         #self.images_r = self._load_images("C:/Users/45213/OneDrive/Desktop/sequence3/images_r")
-        self.images_l = self._load_images("C:/Users/45213/Downloads/data_odometry_gray/dataset/sequences/07/image_0")
-        self.images_r = self._load_images("C:/Users/45213/Downloads/data_odometry_gray/dataset/sequences/07/image_1")
+        self.images_l = self._load_images("/Users/devanshmenaria/Computer Vision Assignments/Course Project/VisualSLAM/KITTI_sequence_2/image_l")
+        self.images_r = self._load_images("/Users/devanshmenaria/Computer Vision Assignments/Course Project/VisualSLAM/KITTI_sequence_2/image_r")
 
         print("Number of left images: ", len(self.images_l))
         print("Number of right images: ", len(self.images_r))
@@ -202,7 +202,7 @@ class VisualOdometry():
         keypoints1, descriptors1 = self.orb.detectAndCompute(img1, None)
         keypoints2, descriptors2 = self.orb.detectAndCompute(img2, None)
 
-        matches = self.flann.knnMatch(descriptors1, descriptors2, k=2)
+        matches = self.flann.knnMatch(descriptors1, descriptors2, k=3)
 
         # store all the good matches as per Lowe's ratio test.
         good = []
@@ -448,10 +448,10 @@ class VisualOdometry():
 
 
 def main():
-    data_dir = 'KITTI_sequence_1'  # Try KITTI_sequence_2
+    data_dir = 'KITTI_sequence_2'  # Try KITTI_sequence_2
     vo = VisualOdometry(data_dir)
 
-    #play_trip(vo.images_l, vo.images_r)  # Comment out to not play the trip
+    play_trip(vo.images_l, vo.images_r)  # Comment out to not play the trip
 
     n_clusters = 10 
     n_features = 200

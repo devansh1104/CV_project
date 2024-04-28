@@ -510,12 +510,12 @@ class VisualOdometry():
 
 
 def main():
-    data_dir = 'KITTI_sequence_1'  # Try KITTI_sequence_2 os.path.join("kitti", '07') #
+    data_dir = 'KITTI_sequence_2'  # Try KITTI_sequence_1 os.path.join("kitti", '07') #
     vo = VisualOdometry(data_dir)
     print ("lenght of gt poses: " + str(len(vo.gt_poses)))
     g = graph()
     
-    # play_trip(vo.images_l, vo.images_r)  # Comment out to not play the trip
+    play_trip(vo.images_l, vo.images_r)  # Comment out to not play the trip
     
     gt_path = []
     estimated_path = []
